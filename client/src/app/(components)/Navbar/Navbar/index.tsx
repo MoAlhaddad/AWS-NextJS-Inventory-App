@@ -1,20 +1,35 @@
 'use client'
+import { useAppDispatch, useAppSelector } from '@/app/redux'
+import { setIsDarkMode, setIsSidebarCollapsed } from '@/state'
 //cannot pass OnClick function on server component in NEXTJS this is why we import use client
-import { Bell, Menu, Settings, Sun } from 'lucide-react'
+import { Bell, Menu, Moon, Settings, Sun } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const isSideBarCollapsed = useAppSelector(
+      (state) => state.global.isSidebarCollapsed );
+  const isDarkMode = useAppSelector((state) => state.global.isDarkmode);
+
+
+  const toggleSidebar = () => {
+      dispatch(setIsSidebarCollapsed(!isSideBarCollapsed));
+  };
+
+  const toggleDarkmode = () => {
+    dispatch(setIsDarkMode(!isDarkMode));
+  }
   return (
     <div className='flex justify-between items-center w-full mb-7'>
       {/*left side */}
       <div className='flex justify-between items-center gap-5 '>
-        <button className='px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100' onClick={() => {}}>
+        <button className='px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100' onClick={toggleSidebar}>
             <Menu className='w-4 h-4' />
         </button>
 
       <div className="relative">
-        <input type="search" placeholder='Start type  to search groups & products' className='pl-10 py-2 w-50 md:w-80  border-2 border-gray-500 bg-white rounded-lg focus:outline-none focus:border-blue-500'/>
+        <input type="search" placeholder='Start type  to search groups & products' className='pl-10 py-2 w-50 md:w-60  border-2 border-gray-500 bg-white rounded-lg focus:outline-none focus:border-blue-500'/>
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <Bell className='text-gray-500' size={20} />
         </div>
@@ -24,8 +39,10 @@ const Navbar = () => {
       <div className="flex justify-between items-center gap-5">
         <div className="hidden md:flex justify-between items-center gap-5">
             <div>
-                <button onClick={() => {}}>
+                <button onClick={toggleDarkmode}>
+                  {isDarkMode ? (
                     <Sun className='cursor-pointer text-gray-500' size={24}/>
+                  ):(   <Moon className='cursor-pointer text-gray-500' size={24}/> ) }
                 </button>
             </div>
             <div className="relative">
