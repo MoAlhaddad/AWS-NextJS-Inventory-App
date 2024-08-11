@@ -24,7 +24,7 @@ async function deleteAllData(orderedFileNames: string[]) {
 
 async function main() {
   const dataDirectory = path.join(__dirname, "seedData");
-
+//order matters due to foreign ids connection
   const orderedFileNames = [
     "products.json",
     "expenseSummary.json",
