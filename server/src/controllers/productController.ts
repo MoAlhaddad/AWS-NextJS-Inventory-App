@@ -16,8 +16,31 @@ export const getProducts = async (
                 }
             }
         })
+        res.json(products)
   }
   catch (error) {
     res.status(500).json({ message: "Error retrieving products" });
   }
 };
+
+export const createProduct = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    try {
+        const { productId, name, price, rating, stockQuantity} = req.body;
+        const product = await prisma.products.create({
+            data: {
+                productId,
+                name,
+                price,
+                rating,
+                stockQuantity,
+            },
+        });
+        res.status(201).json(product);
+        
+    } catch (error) {
+        res.status(400).json({message: "Error Creating Product"});
+    }
+}

@@ -8,6 +8,8 @@ import morgan from "morgan";
 
 /* ROUTE IMPORTS */
 import dashboardRoutes from "./routes/dashboardRoutes";
+import productRoutes from "./routes/productRoutes";
+import userRoutes from "./routes/userRoutes"
 /* CONFIGURATIONS */
 
 dotenv.config();
@@ -21,8 +23,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
 /* ROUTES */
-app.use("/dashboard", dashboardRoutes)
-
+app.use("/dashboard", dashboardRoutes)  //localhost:8000/dashboard
+app.use("/products", productRoutes)   //localhost:8000/products
+app.use("/users", userRoutes);  //localhost:8000/users
+/* To test route use curl routepath in terminal
 /*SERVER */
 
 const port = process.env.PORT || 3001
