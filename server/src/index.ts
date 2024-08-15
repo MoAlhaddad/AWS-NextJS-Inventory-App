@@ -9,7 +9,8 @@ import morgan from "morgan";
 /* ROUTE IMPORTS */
 import dashboardRoutes from "./routes/dashboardRoutes";
 import productRoutes from "./routes/productRoutes";
-import userRoutes from "./routes/userRoutes"
+import userRoutes from "./routes/userRoutes";
+import expenseRoutes from "./routes/expenseRoutes";
 /* CONFIGURATIONS */
 
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(cors());
 app.use("/dashboard", dashboardRoutes)  //localhost:8000/dashboard
 app.use("/products", productRoutes)   //localhost:8000/products
 app.use("/users", userRoutes);  //localhost:8000/users
+app.use("/expenses", expenseRoutes)
 /* To test route use curl routepath in terminal
 /*SERVER */
 
